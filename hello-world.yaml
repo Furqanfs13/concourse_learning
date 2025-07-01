@@ -85,7 +85,7 @@
 #           ls -l .
 #           cat the-artifact/message
 
-# using git as resource
+# using git as resource 
 resources:
 - name: repo 
   type: git
