@@ -41,47 +41,71 @@
 #         args: ["-lF"]
 
 # using op from this task as an ip to another
-jobs:
+# jobs:
+# - name: hello-world-job
+#   plan: 
+#   - task: hello-world-task
+#     config: 
+#     # Tells Concourse which type of worker this task should run on
+#       platform: linux
+#       # This is one way of telling Concourse which container image to use for a task.
+#       image_resource: 
+#         type: registry-image
+#         source: 
+#           repository: busybox # images are pulled from docker hub by default
+#        # Add "the-artifact" to our task
+#       outputs:
+#       - name: the-artifact
+#       run:
+#       # Change the command to `ls -lF` to see
+#       # what the task sees in its working directory
+#         path: sh
+#         args:
+#         # This is a neat way of embedding a script into a task
+#         - -cx
+#         - |
+#           ls -l .
+#           echo "Hello from another step" > the-artifact/message
+#   # Add a second task that reads the contents of the-artifact/message
+#   - task: read-the-artifact
+#     config:
+#       platform: linux
+#       image_resource:
+#         type: registry-image
+#         source:
+#           repository: busybox
+#       # To receive "the-artifact", specify it as an input
+#       inputs:
+#       - name: the-artifact
+#       run:
+#         path: sh 
+#         args:
+#         - -cx
+#         - |
+#           ls -l .
+#           cat the-artifact/message
+
+# using git as resource
+resources:
+- name: repo 
+  type: git
+  source:
+    url: https://github.com/Furqanfs13/concourse_learning.git
+
+job:
 - name: hello-world-job
-  plan: 
+  plan:
+  # Add a get step referencing the resource
+  - get: repo
+    trigger: True  # tell Concourse to trigger this job when new versions are emitted
   - task: hello-world-task
-    config: 
-    # Tells Concourse which type of worker this task should run on
-      platform: linux
-      # This is one way of telling Concourse which container image to use for a task.
-      image_resource: 
-        type: registry-image
-        source: 
-          repository: busybox # images are pulled from docker hub by default
-       # Add "the-artifact" to our task
-      outputs:
-      - name: the-artifact
-      run:
-      # Change the command to `ls -lF` to see
-      # what the task sees in its working directory
-        path: sh
-        args:
-        # This is a neat way of embedding a script into a task
-        - -cx
-        - |
-          ls -l .
-          echo "Hello from another step" > the-artifact/message
-  # Add a second task that reads the contents of the-artifact/message
-  - task: read-the-artifact
     config:
       platform: linux
       image_resource:
         type: registry-image
         source:
           repository: busybox
-      # To receive "the-artifact", specify it as an input
-      inputs:
-      - name: the-artifact
       run:
-        path: sh 
-        args:
-        - -cx
-        - |
-          ls -l .
-          cat the-artifact/message
+        path: echo
+        args: ["Hello World!"]
 
