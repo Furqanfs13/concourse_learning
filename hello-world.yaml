@@ -95,6 +95,8 @@ resources:
 jobs:
 - name: hello-world-job
   plan:
+  - get: repo
+    trigger: true   # tell Concourse to trigger this job when new versions are emitted
   - task: hello-world-task
     config:
       platform: linux
@@ -104,5 +106,5 @@ jobs:
           repository: busybox
       run:
         path: echo
-        args: ["Now?"]
+        args: ["15vi baar h bhai chl ja"]
 
