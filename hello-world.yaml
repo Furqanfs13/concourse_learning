@@ -106,5 +106,5 @@ jobs:
           repository: busybox
       run:
         path: echo
-        args: ["new pipeline new me"]
+        args: ["new pipeline old problems"]
 
