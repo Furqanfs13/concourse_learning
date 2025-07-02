@@ -106,5 +106,5 @@ jobs:
           repository: busybox
       run:
         path: echo
-        args: ["15vi baar h bhai chl ja"]
+        args: ["new pipeline new me"]
 
