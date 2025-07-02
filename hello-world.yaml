@@ -107,5 +107,5 @@ job:
           repository: busybox
       run:
         path: echo
-        args: ["Hello World!"]
+        args: ["Hello World trial to see if the job gets triggered correctly!"]
 
