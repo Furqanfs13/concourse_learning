@@ -107,5 +107,6 @@ job:
           repository: busybox
       run:
         path: echo
-        args: ["Hello Furqan see if it gets triggered!"]
+        args: ["Hello furqan trial to see if the job gets triggered correctly!"]
+
 
