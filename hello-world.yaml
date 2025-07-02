@@ -91,7 +91,7 @@ resources:
   type: git
   source:
     uri: https://github.com/Furqanfs13/concourse_learning.git
-    branch: master
+    branch: main
 
 jobs:
 - name: hello-world-job
