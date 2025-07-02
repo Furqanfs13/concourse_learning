@@ -85,7 +85,7 @@
 #           ls -l .
 #           cat the-artifact/message
 
-# using git as resource
+# using git as resource run when commit 
 resources:
 - name: repo 
   type: git
@@ -108,4 +108,5 @@ job:
       run:
         path: echo
         args: ["Hello furqan trial to see if the job gets triggered correctly!"]
+
 
